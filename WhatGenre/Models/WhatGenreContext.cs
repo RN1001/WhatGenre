@@ -10,6 +10,7 @@ namespace WhatGenre.Models
     {
         public WhatGenreContext(DbContextOptions<WhatGenreContext> options) : base(options)
         {
+            // makes sure database is created first before making queries.
             Database.EnsureCreated();
         }
 
