@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WhatGenre.Interfaces;
+using WhatGenre.Repository;
 
 namespace WhatGenre
 {
@@ -26,6 +23,10 @@ namespace WhatGenre
         {
             services.AddControllersWithViews();
             services.AddDbContext<Models.WhatGenreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WhatGenreContext")));
+
+            //services.AddTransient<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddMvcCore();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
