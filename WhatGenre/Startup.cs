@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WhatGenre.Interfaces;
 using WhatGenre.Repository;
+using WhatGenre.Services;
 
 namespace WhatGenre
 {
@@ -24,7 +25,7 @@ namespace WhatGenre
             services.AddControllersWithViews();
             services.AddDbContext<Models.WhatGenreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WhatGenreContext")));
 
-            //services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddMvcCore();
         }
