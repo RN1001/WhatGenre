@@ -9,20 +9,19 @@ namespace WhatGenre.Views.Register
     public class RegisterController : Controller
     {
 
-        private readonly IUserRepository userRepository;
+        private readonly IUserService userService;
 
         private readonly ILogger logger;
 
-        public RegisterController(IUserRepository userRepository, ILogger<RegisterController> logger)
+        public RegisterController(IUserService userService, ILogger<RegisterController> logger)
         {
-            this.userRepository = userRepository;
+            this.userService = userService;
             this.logger = logger;
         }
 
         [HttpGet]
         public IActionResult Index()
-        {
-            logger.LogInformation($"message: {userRepository.GetById(1)}");
+        { 
             return Content($"Lol");
         }
 
@@ -30,7 +29,7 @@ namespace WhatGenre.Views.Register
         [Route("user/{id:int}")]
         public IActionResult GetUser(int id)
         {
-            return Content($"{id}");
+            return Content($"{userService.GetUserById(id)}");
         }
 
         [HttpGet("create")]
