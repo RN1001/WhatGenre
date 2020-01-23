@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using WhatGenre.Interfaces;
 using WhatGenre.Models;
 
@@ -15,14 +16,15 @@ namespace WhatGenre.Repository
             _context = context;
         }
 
-        public User GetById(int id)
+        public List<User> FindAll()
+        {
+            return _context.Set<User>().ToList();
+        }
+
+        public User FindById(int id)
         {
             return _context.Users.Find(id);
         }
 
-        public List<User> GetUsers()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

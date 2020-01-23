@@ -6,7 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace WhatGenre.Models
-{
+{   
+   
     public class User
     {
         [Key]

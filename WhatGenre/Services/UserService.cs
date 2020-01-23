@@ -18,12 +18,12 @@ namespace WhatGenre.Services
 
         public User GetUserById(int id)
         {
-            return userRepository.GetById(id);
+            return userRepository.FindById(id);
         }
 
         public List<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return userRepository.FindAll();
         }
     }
 }

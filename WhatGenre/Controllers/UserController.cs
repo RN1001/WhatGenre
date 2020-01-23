@@ -6,14 +6,14 @@ using WhatGenre.Interfaces;
 namespace WhatGenre.Views.Register
 {
     [Route("register")]
-    public class RegisterController : Controller
+    public class UserController : Controller
     {
 
         private readonly IUserService userService;
 
         private readonly ILogger logger;
 
-        public RegisterController(IUserService userService, ILogger<RegisterController> logger)
+        public UserController(IUserService userService, ILogger<UserController> logger)
         {
             this.userService = userService;
             this.logger = logger;
@@ -22,7 +22,7 @@ namespace WhatGenre.Views.Register
         [HttpGet]
         public IActionResult Index()
         { 
-            return Content($"Lol");
+            return Content($"{userService.GetAllUsers()}");
         }
 
 
