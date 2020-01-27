@@ -1,14 +1,10 @@
-﻿using System;
+﻿using ApplicationCore.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WhatGenre.Models;
 
-namespace WhatGenre.Interfaces
+namespace ApplicationCore.Interfaces
 {
     public interface IUserService
     {
-
         public User GetUserById(int id);
 
         public List<User> GetAllUsers();

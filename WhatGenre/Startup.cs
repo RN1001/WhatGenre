@@ -1,14 +1,14 @@
+using ApplicationCore.Interfaces;
+using ApplicationCore.Services;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WhatGenre.Interfaces;
-using WhatGenre.Repository;
-using WhatGenre.Services;
 
-namespace WhatGenre
+namespace WhatGenre.Web
 {
     public class Startup
     {
@@ -23,7 +23,7 @@ namespace WhatGenre
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<Models.WhatGenreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WhatGenreContext")));
+            services.AddDbContext<WhatGenreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WhatGenreContext")));
 
             services.AddTransient<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -39,7 +39,7 @@ namespace WhatGenre
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }

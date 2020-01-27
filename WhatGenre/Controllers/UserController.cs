@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApplicationCore.Entities;
+using ApplicationCore.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WhatGenre.Models;
-using WhatGenre.Interfaces;
 
-namespace WhatGenre.Views.Register
+namespace WhatGenre.Controllers
 {
-    [Route("register")]
+    [Route("user")]
     public class UserController : Controller
     {
 
@@ -21,7 +21,7 @@ namespace WhatGenre.Views.Register
 
         [HttpGet]
         public IActionResult Index()
-        { 
+        {
             return Content($"{userService.GetAllUsers()}");
         }
 
@@ -41,7 +41,7 @@ namespace WhatGenre.Views.Register
 
         [HttpPost]
         public IActionResult Create(User user)
-        {         
+        {
             return Content($"{user}");
         }
     }

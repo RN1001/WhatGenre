@@ -1,16 +1,13 @@
-﻿using System;
+﻿using ApplicationCore.Entities;
+using ApplicationCore.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WhatGenre.Interfaces;
-using WhatGenre.Models;
 
-namespace WhatGenre.Services
+namespace ApplicationCore.Services
 {
     public class UserService : IUserService
     {
         private readonly IUserRepository userRepository;
-        
+
         public UserService(IUserRepository userRepository)
         {
             this.userRepository = userRepository;

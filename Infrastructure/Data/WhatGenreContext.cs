@@ -1,10 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ApplicationCore.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace WhatGenre.Models
+namespace Infrastructure.Data
 {
     public class WhatGenreContext : DbContext
     {

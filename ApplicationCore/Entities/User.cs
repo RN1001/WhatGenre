@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace WhatGenre.Models
-{   
-   
-    public class User
+namespace ApplicationCore.Entities
+{
+    public class User : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
+        
         [Display(Name = "Username")]
         [Required]
         public string Username { get; set; }
@@ -32,13 +25,13 @@ namespace WhatGenre.Models
         public string Lastname { get; set; }
 
         [Display(Name = "Full name")]
-        public string Fullname => this.Firstname + " " + this.Lastname;
-        
+        public string Fullname => Firstname + " " + Lastname;
+
         public ICollection<Address> Addresses { get; set; }
 
         public override string ToString()
         {
-            return this.Username + " " + Password + " " + Fullname;
+            return Username + " " + Password + " " + Fullname;
         }
 
     }
