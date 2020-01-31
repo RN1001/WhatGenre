@@ -3,12 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApplicationCore.Entities
 {
-    public class Address
+    public class Address : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
+   
         [Display(Name = "House number")]
         [Required]
         public int HouseNo { get; set; }

@@ -4,12 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApplicationCore.Entities
 {
-    public class Comment
+    public class Comment : BaseEntity
     {
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
 
         [Required]
         [Display(Name = "Comment")]
