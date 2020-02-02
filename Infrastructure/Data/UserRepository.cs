@@ -3,6 +3,7 @@ using ApplicationCore.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
@@ -14,9 +15,7 @@ namespace Infrastructure.Data
 
         }
 
-      
-
-        public string GetFullName()
+        public Task<string> GetFullName()
         {
             throw new System.NotImplementedException();
         }

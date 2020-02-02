@@ -23,7 +23,7 @@ namespace WhatGenre.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<WhatGenreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WhatGenreContext")));
+            services.AddDbContext<WhatGenreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WhatGenreContext"), b => b.MigrationsAssembly("Infrastructure")));
 
             services.AddTransient<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -31,8 +31,10 @@ namespace WhatGenre.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WhatGenreContext context)
         {
+            //context.Database.Migrate();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -56,6 +58,9 @@ namespace WhatGenre.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+           
+
         }
     }
 }

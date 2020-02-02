@@ -1,7 +1,9 @@
 ﻿using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
@@ -15,14 +17,14 @@ namespace Infrastructure.Data
             _context = context;
         }
 
-        public List<T> FindAll()
+        public async Task<List<T>> FindAllAsync()
         {
-            return _context.Set<T>().ToList();
+            return await _context.Set<T>().ToListAsync();
         }
 
-        public T FindById(int id)
+        public async Task<T> FindByIdAsync(int id)
         {
-            return _context.Set<T>().Find(id);
+            return await _context.Set<T>().FindAsync(id);
         }
     }
 }

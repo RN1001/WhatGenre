@@ -2,6 +2,7 @@
 using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace WhatGenre.Controllers
 {
@@ -20,16 +21,18 @@ namespace WhatGenre.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return Content($"{userService.GetAllUsers()}");
+            var users = await userService.GetAllUsers();
+            return Content($"{users}");
         }
 
 
         [Route("user/{id:int}")]
-        public IActionResult GetUser(int id)
+        public async Task<IActionResult> GetUser(int id)
         {
-            return Content($"{userService.GetUserById(id)}");
+            var user = await userService.GetAllUsers();
+            return Content($"{user}");
         }
 
         [HttpGet("create")]

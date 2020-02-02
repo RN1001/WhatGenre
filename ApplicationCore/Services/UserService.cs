@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
@@ -13,14 +14,14 @@ namespace ApplicationCore.Services
             this.userRepository = userRepository;
         }
 
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            return userRepository.FindById(id);
+            return await userRepository.FindByIdAsync(id);
         }
 
-        public List<User> GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
-            return userRepository.FindAll();
+            return await userRepository.FindAllAsync();
         }
     }
 }

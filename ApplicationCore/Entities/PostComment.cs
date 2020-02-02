@@ -8,16 +8,17 @@ namespace ApplicationCore.Entities
 {
     public class PostComment
     {
-        [Key, Column(Order = 0)]
+        [Key]
         public int PostId { get; set; }
         public Post Post { get; set; }
 
-        [Key, Column(Order = 1)]
+        [Key]
         public int CommentId { get; set; }
         public Comment Comment { get; set; }
 
-        [ForeignKey("UserId")]
+        
         public int UserId { get; set; }
+        [ForeignKey("UserId")]
         public User User { get; set; }
 
     }

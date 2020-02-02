@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Infrastructure.Data
 {
@@ -7,7 +8,7 @@ namespace Infrastructure.Data
     {
         public WhatGenreContext(DbContextOptions<WhatGenreContext> options) : base(options)
         {
-            // makes sure database is created first before making queries.
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -20,11 +21,24 @@ namespace Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<User>()
+              .HasMany(a => a.Addresses)
+              .WithOne(u => u.User);
+
             modelBuilder.Entity<Address>().ToTable("Address");
             modelBuilder.Entity<Post>().ToTable("Post");
             modelBuilder.Entity<Comment>().ToTable("Comment");
-            modelBuilder.Entity<PostComment>().ToTable("PostComment");
+            modelBuilder.Entity<PostComment>().HasKey(pc => new { pc.PostId, pc.CommentId });
+
+            modelBuilder.Entity<PostComment>()
+                .HasOne(p => p.Post)
+                .WithMany(p => p.PostComments)
+                .HasForeignKey(p => p.PostId);
+
+            modelBuilder.Entity<PostComment>()
+                .HasOne(c => c.Comment)
+                .WithMany(pc => pc.PostComments)
+                .HasForeignKey(c => c.CommentId);
 
         }
 

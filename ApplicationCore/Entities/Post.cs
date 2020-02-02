@@ -19,5 +19,7 @@ namespace ApplicationCore.Entities
         [Required]
         public DateTime CreatedDate { get; set; }
 
+        public virtual ICollection<PostComment> PostComments { get; set; }
+
     }
 }

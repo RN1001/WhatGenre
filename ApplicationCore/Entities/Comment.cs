@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,5 +15,8 @@ namespace ApplicationCore.Entities
 
         [Display(Name = "Date of comment")]
         public DateTime CommentDate { get; set; }
+
+        public virtual ICollection<PostComment> PostComments { get; set; }
+
     }
 }

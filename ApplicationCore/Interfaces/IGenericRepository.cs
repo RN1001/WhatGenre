@@ -1,12 +1,13 @@
 ﻿using ApplicationCore.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApplicationCore.Interfaces
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {
-        public T FindById(int id);
+        public Task<T> FindByIdAsync(int id);
 
-        public List<T> FindAll();
+        public Task<List<T>> FindAllAsync();
     }
 }
