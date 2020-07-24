@@ -7,20 +7,17 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
+    /// <summary>
+    /// hint for self, UserRepo inherits generics methods form EFRepo, and custom domain specific methods from the IUserRepo
+    /// </summary>
     public class UserRepository : EfRepository<User>, IUserRepository
     {
+        private readonly WhatGenreContext context;
 
         public UserRepository(WhatGenreContext whatGenreContext) : base(whatGenreContext)
         {
-
+            context = whatGenreContext;
         }
-
-        public Task<string> GetFullName()
-        {
-            throw new System.NotImplementedException();
-        }
-
-
 
     }
 }

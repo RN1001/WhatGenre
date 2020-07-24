@@ -14,7 +14,7 @@ namespace ApplicationCore.Services
             this.userRepository = userRepository;
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetUserById(int? id)
         {
             return await userRepository.FindByIdAsync(id);
         }
@@ -22,6 +22,21 @@ namespace ApplicationCore.Services
         public async Task<List<User>> GetAllUsers()
         {
             return await userRepository.FindAllAsync();
+        }
+
+        public async Task<User> Save(User user)
+        {
+            return await this.userRepository.SaveAsync(user);
+        }
+
+        public async Task<User> Edit(int? id)
+        {
+            return await userRepository.EditAsync(id);
+        }
+
+        public async Task<User> Delete(int? id)
+        {
+            return await userRepository.DeleteAsync(id);
         }
     }
 }
