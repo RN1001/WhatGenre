@@ -9,7 +9,6 @@ namespace WhatGenre.Controllers
     [Route("user")]
     public class UserController : Controller
     {
-
         private readonly IUserService userService;
 
         private readonly ILogger logger;
@@ -28,24 +27,13 @@ namespace WhatGenre.Controllers
         }
 
 
-        [Route("user/{id:int}")]
+        [HttpGet, Route("{id:int}")]
         public async Task<IActionResult> GetUser(int id)
         {
             var user = await userService.GetAllUsers();
-            return Content($"{user}");
+            return Content($"{user.ToArray()}");
         }
 
-        [HttpGet("create")]
-        public IActionResult Create()
-        {
-            logger.LogInformation("message");
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(User user)
-        {
-            return Content($"{user}");
-        }
+        
     }
 }
