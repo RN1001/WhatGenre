@@ -8,11 +8,11 @@ namespace ApplicationCore.Entities
     public class Post : BaseEntity
     {
         [Display(Name = "Title")]
-        [Required]
+        [Required, StringLength(100, MinimumLength = 5, ErrorMessage = "Title should be between 5 - 100 characters")]
         public string Title { get; set; }
 
         [Display(Name = "Description")]
-        [Required]
+        [Required, StringLength(100, MinimumLength = 5, ErrorMessage = "Title should be between 5 - 100 characters")]
         public string Description { get; set; }
 
         [Display(Name = "Post created at")]
