@@ -1,0 +1,7 @@
+﻿@{ 
+    string message = TempData["message"] as string;
+    if (message != null)
+    {
+        <p class="alert alert-success">@message</p>
+    }
+}
