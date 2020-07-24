@@ -7,6 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
+using ApplicationCore.Entities;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace WhatGenre.Web
 {
@@ -24,9 +28,15 @@ namespace WhatGenre.Web
         {
             services.AddControllersWithViews();
             services.AddDbContext<WhatGenreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WhatGenreContext"), b => b.MigrationsAssembly("Infrastructure")));
-
+            services.AddIdentity<User, ApplicationRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<WhatGenreContext>();
             services.AddTransient<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
+      
+            services.ConfigureApplicationCookie(opts => opts.LoginPath = "/login/account_login");
+            services.AddRazorPages();
             services.AddMvcCore();
         }
 
@@ -50,6 +60,7 @@ namespace WhatGenre.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -57,6 +68,7 @@ namespace WhatGenre.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
 
            
