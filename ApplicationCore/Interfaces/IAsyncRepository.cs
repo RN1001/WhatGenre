@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Interfaces
 {
-    public interface IAsyncRepository<T> where T : IdentityUser<string>
+    public interface IAsyncRepository<T> where T : BaseEntity
     {
         public Task<T> FindByIdAsync(int? id);
 

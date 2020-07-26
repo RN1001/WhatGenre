@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class EfRepository<T> : IAsyncRepository<T> where T : IdentityUser<string>
+    public class EfRepository<T> : IAsyncRepository<T> where T : BaseEntity
     {
 
         private readonly WhatGenreContext _context;
