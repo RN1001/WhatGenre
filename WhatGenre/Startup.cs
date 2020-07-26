@@ -32,8 +32,8 @@ namespace WhatGenre.Web
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<WhatGenreContext>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddTransient<IPostService, PostService>();
+            services.AddScoped<IPostRepository, PostRepository>();
       
             services.ConfigureApplicationCookie(opts => opts.LoginPath = "/login/account_login");
             services.AddRazorPages();
@@ -63,11 +63,25 @@ namespace WhatGenre.Web
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // add home area and map route
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
+                  //name: "default",
+                  //pattern: "{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapAreaControllerRoute(
+                //    name: "HomeArea",
+                //    areaName: "Home",
+                //    pattern: "{Home:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name: "ForumArea",
+                    areaName: "Forum",
+                    pattern: "Forum/{controller=Forum}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name: "StoreArea",
+                    areaName: "Store",
+                    pattern: "Store/{controller=Store}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
 
