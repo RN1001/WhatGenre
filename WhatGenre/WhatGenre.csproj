@@ -22,15 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Forum\Controllers\" />
     <Folder Include="Areas\Forum\Data\" />
     <Folder Include="Areas\Forum\Models\" />
-    <Folder Include="Areas\Forum\Views\" />
-    <Folder Include="Areas\Store\Controllers\" />
     <Folder Include="Areas\Store\Data\" />
     <Folder Include="Areas\Store\Models\" />
-    <Folder Include="Areas\Store\Views\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ApplicationCore\ApplicationCore.csproj"></ProjectReference>
