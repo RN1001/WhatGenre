@@ -32,6 +32,10 @@ namespace Infrastructure.Data
             modelBuilder.Entity<Comment>().ToTable("Comment");
             modelBuilder.Entity<PostComment>().HasKey(pc => new { pc.PostId, pc.CommentId });
 
+            modelBuilder.Entity<Post>()
+                .Property(p => p.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
             modelBuilder.Entity<PostComment>()
                 .HasOne(p => p.Post)
                 .WithMany(pc => pc.PostComments)
