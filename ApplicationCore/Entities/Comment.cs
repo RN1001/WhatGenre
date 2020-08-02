@@ -16,7 +16,19 @@ namespace ApplicationCore.Entities
         [Display(Name = "Date of comment")]
         public DateTime CommentDate { get; set; }
 
-        public virtual ICollection<PostComment> PostComments { get; set; }
+        [ForeignKey("PostId")]
+        public int PostId { get; set; }
+        public Post Post { get; set; }
+
+        [ForeignKey("UserId")]
+        public Guid UserId { get; set; }
+        public User User { get; set; }
+
+        public override string ToString()
+        {
+            return $"Comment: {CommentBody}, Date: {CommentDate}";
+        }
+
 
     }
 }
