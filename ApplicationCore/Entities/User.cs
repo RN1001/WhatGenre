@@ -12,23 +12,11 @@ namespace ApplicationCore.Entities
         [Key]
         public override string Id { get => base.Id; set => base.Id = value; }
 
-        //[Display(Name = "First name")]
-        //[Required, StringLength(100, MinimumLength = 1, ErrorMessage = "Firstname must be between 1 - 100 characters")]
-        //public string Firstname { get; set; }
-
-        //[Display(Name = "Last name")]
-        //[Required, StringLength(100, MinimumLength = 1, ErrorMessage = "Firstname must be between 1 - 100 characters")]
-        //public string Lastname { get; set; }
-
-        //[Display(Name = "Full name")]
-        //public string Fullname => Firstname + " " + Lastname;
-
         public ICollection<Address> Addresses { get; set; }
 
-        //public override string ToString()
-        //{
-        //    return Fullname;
-        //}
+        public ICollection<Post> Posts { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
 
     }
 }
