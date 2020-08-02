@@ -3,7 +3,51 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@model List<ApplicationCore.Entities.Post>
 
 <h1>Forum</h1>
 
-<a class="btn btn-primary" asp-area="Forum" asp-controller="Forum" asp-action="AddPost"> Add </a>
+@if (SignInManager.IsSignedIn(User))
+{
+    <a class="btn btn-primary" asp-area="Forum" asp-controller="Forum" asp-action="Create"> Create Post </a>
+}
+else
+{
+    <p> Can't create a post yet </p>
+}
+
+<table border="1">
+    <thead>
+        <tr>
+            <th> Title </th>
+            <th> Description </th>
+            <th> Created at </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var posts in Model)
+        {
+        <tr>
+
+            <td>@posts.Title </td>
+            <td> @posts.Description </td>
+            <td> @posts.CreatedDate </td>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <td> <a class="btn btn-primary" asp-action="Details" asp-route-id="@posts.Id"> Details </a> </td>
+                <td> <a class="btn btn-primary" asp-action="Edit" asp-route-id="@posts.Id"> Edit </a> </td>
+                <td> <a class="btn btn-primary" asp-action="Delete" asp-route-id="@posts.Id"> Delete </a> </td>
+            }
+            else 
+            {
+            <td> You must be signed in to view posts in detail. </td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+
+
