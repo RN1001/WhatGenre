@@ -34,6 +34,9 @@ namespace WhatGenre.Web
                 .AddEntityFrameworkStores<WhatGenreContext>();
             services.AddTransient<IPostService, PostService>();
             services.AddScoped<IPostRepository, PostRepository>();
+
+            services.AddTransient<ICommentService, CommentService>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
       
             services.ConfigureApplicationCookie(opts => opts.LoginPath = "/login/account_login");
             services.AddRazorPages();
@@ -68,12 +71,6 @@ namespace WhatGenre.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
-                  //name: "default",
-                  //pattern: "{controller=Home}/{action=Index}/{id?}");
-                //endpoints.MapAreaControllerRoute(
-                //    name: "HomeArea",
-                //    areaName: "Home",
-                //    pattern: "{Home:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapAreaControllerRoute(
                     name: "ForumArea",
                     areaName: "Forum",
