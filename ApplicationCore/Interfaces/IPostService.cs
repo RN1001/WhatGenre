@@ -12,7 +12,7 @@ namespace ApplicationCore.Interfaces
 
         public Task<Post> Save(Post post);
 
-        public Task<Post> Edit(int? id);
+        public Task<Post> Edit(int? id, Post post);
 
         public Task<Post> Delete(int? id);
 

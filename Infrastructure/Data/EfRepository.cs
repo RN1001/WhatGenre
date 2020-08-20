@@ -35,9 +35,9 @@ namespace Infrastructure.Data
             return entity;
         }
 
-        public async Task<T> EditAsync(int? id)
+        public async Task<T> EditAsync(int? id, T entity)
         {
-            var entity = await _context.Set<T>().FindAsync(id);
+            entity = await _context.Set<T>().FindAsync(id);
             if (entity == null)
             {
                 return entity;

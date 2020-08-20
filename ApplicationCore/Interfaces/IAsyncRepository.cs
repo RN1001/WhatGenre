@@ -13,7 +13,7 @@ namespace ApplicationCore.Interfaces
 
         public Task<T> SaveAsync(T t);
 
-        public Task<T> EditAsync(int? id);
+        public Task<T> EditAsync(int? id, T t);
 
         public Task<T> DeleteAsync(int? id);
 

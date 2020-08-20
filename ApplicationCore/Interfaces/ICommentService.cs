@@ -14,7 +14,7 @@ namespace ApplicationCore.Interfaces
 
         public Task<Comment> Save(Comment comment);
 
-        public Task<Comment> Edit(int? id);
+        public Task<Comment> Edit(int? id, Comment comment);
 
         public Task<Comment> Delete(int? id);
 

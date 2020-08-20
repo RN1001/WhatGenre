@@ -16,10 +16,10 @@
 }
 else
 {
-    <p> Can't create a post yet </p>
+    <p> Sign in to create a new post. </p>
 }
-
-<table border="1">
+<br />
+<table class="table table-bordered">
     <thead>
         <tr>
             <th> Title </th>
@@ -37,9 +37,9 @@ else
             <td> @posts.CreatedDate </td>
             @if (SignInManager.IsSignedIn(User))
             {
-                <td> <a class="btn btn-primary" asp-action="Details" asp-route-id="@posts.Id"> Details </a> </td>
-                <td> <a class="btn btn-primary" asp-action="Edit" asp-route-id="@posts.Id"> Edit </a> </td>
-                <td> <a class="btn btn-primary" asp-action="Delete" asp-route-id="@posts.Id"> Delete </a> </td>
+                <td> <a class="btn btn-primary" asp-controller="Forum" asp-action="Details" asp-route-id="@posts.Id"> Details </a> </td>
+                <td> <a class="btn btn-primary" asp-controller="Forum" asp-action="Edit" asp-route-id="@posts.Id"> Edit </a> </td>
+                <td> <a class="btn btn-primary" asp-controller="Forum" asp-action="Delete" asp-route-id="@posts.Id"> Delete </a> </td>
             }
             else 
             {

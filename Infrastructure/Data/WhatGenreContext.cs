@@ -29,9 +29,10 @@ namespace Infrastructure.Data
                 .HasMany(p => p.Posts)
                 .WithOne(u => u.User);
 
-            modelBuilder.Entity<User>()
-                .HasMany(c => c.Comments)
-                .WithOne(u => u.User);
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.Comments)
+                .HasForeignKey(c => c.UserId);
 
             modelBuilder.Entity<Post>()
                 .HasMany(c => c.Comments)

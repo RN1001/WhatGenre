@@ -1,0 +1,35 @@
+﻿@model ApplicationCore.Entities.Post
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-9">
+        <h4>Title: @Model.Title </h4>
+        <p class="lead">Post Description: @Model.Description </p>
+        <p class="lead">Created at: @Model.CreatedDate </p>
+    </div>
+    <div class="col-sm-3">
+        <p>Author: @Model.User.UserName</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        @foreach (var item in Model.Comments)
+        {
+            <div class="media mt-3">
+                <img src="..." class="mr-3" alt="...">
+                <div class="media-body">
+                    <h6 class="mt-0">@item.User.UserName, @item.CommentDate</h6> <!-- TODO: Could add form to edit comment -->
+                    @item.CommentBody
+                </div>
+            </div>
+        }
+    </div>
+    <div class="mt-5">
+        <a asp-controller="Comment" asp-action="Create" asp-route-id="@Model.Id">Comment</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

@@ -31,9 +31,9 @@ namespace ApplicationCore.Services
             return await postRepository.SaveAsync(post);
         }
 
-        public async Task<Post> Edit(int? id)
+        public async Task<Post> Edit(int? id, Post post)
         {
-            return await postRepository.EditAsync(id);
+            return await postRepository.EditAsync(id, post);
         }
 
         public async Task<Post> Delete(int? id)

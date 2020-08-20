@@ -31,9 +31,9 @@ namespace ApplicationCore.Services
         {
             return await commentRepository.SaveAsync(comment);
         }
-        public async Task<Comment> Edit(int? id)
+        public async Task<Comment> Edit(int? id, Comment comment)
         {
-            return await commentRepository.EditAsync(id);
+            return await commentRepository.EditAsync(id, comment);
         }
 
         public async Task<Comment> Delete(int? id)

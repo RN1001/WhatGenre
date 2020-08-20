@@ -17,18 +17,14 @@ namespace ApplicationCore.Entities
         public DateTime CommentDate { get; set; }
 
         [ForeignKey("PostId")]
+        [InverseProperty("Posts")]
         public int PostId { get; set; }
-        public Post Post { get; set; }
+        public virtual Post Post { get; set; }
 
         [ForeignKey("UserId")]
-        public Guid UserId { get; set; }
-        public User User { get; set; }
-
-        public override string ToString()
-        {
-            return $"Comment: {CommentBody}, Date: {CommentDate}";
-        }
-
+        [InverseProperty("Comments")]
+        public string UserId { get; set; }
+        public virtual User User { get; set; }
 
     }
 }
