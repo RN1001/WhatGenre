@@ -50,7 +50,7 @@ namespace WhatGenre.Areas.Forum.Controllers
 
                 await postService.Save(post);
 
-                return RedirectToAction("Post/Index");
+                return Redirect("Index");
             }
 
             return View("Post/Create");
@@ -60,10 +60,11 @@ namespace WhatGenre.Areas.Forum.Controllers
         [HttpGet, Route("Details/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
-            var user = await userManager.GetUserAsync(HttpContext.User);
             var posts = await postService.GetPostById(id);
+   
+            var user = await userManager.FindByIdAsync(posts.UserId);
 
-            posts.UserId = user.Id;
+            posts.User = user;
 
             var comments = await commentService.FindAllCommentsByPostIdAsync(id);
             posts.Comments = comments;
@@ -73,43 +74,53 @@ namespace WhatGenre.Areas.Forum.Controllers
 
         [Authorize]
         [HttpGet, Route("Edit/{id}")]
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(int id)
         {
-            return View("Post/Edit");
+            var post = await postService.GetPostById(id);
+
+            return View("Post/Edit", post);
         }
 
         [Authorize]
         [ValidateAntiForgeryToken]
         [HttpPost, Route("Edit/{id}")]
-        public async Task<IActionResult> Edit(int? id, Post post)
+        public async Task<IActionResult> Edit(int id, Post post)
         {
-            Post data = await postService.GetPostById(id);
+            if (ModelState.IsValid)
+            {
+                Post data = await postService.GetPostById(id);
 
-            post.CreatedDate = data.CreatedDate;
+                post.CreatedDate = data.CreatedDate;
 
-            //if (ModelState.IsValid)
-            //{ 
-            //    await postService.Edit(id, post);
-            //    return View("Post/Details");
-            //}
+                await postService.Edit(id, post);
+                return RedirectToAction("Index");
+            }
 
             return View("Post/Edit");
         }
 
         [Authorize]
         [HttpGet, Route("Delete/{id}")]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View("Post/Delete");
+            var post = await postService.GetPostById(id);
+
+            return View("Post/Delete", post);
         }
 
         [Authorize]
         [HttpPost, Route("Delete/{id}")]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, Post post)
         {
-            await postService.Delete(id);
+            post = await postService.GetPostById(id);
 
-            return Redirect("Forum");
+            if (post != null)
+            {
+                await postService.Delete(id);
+                return Redirect("Index");
+            }
+
+            return BadRequest(400);
         }
 
     }
