@@ -15,9 +15,7 @@ namespace WhatGenre.Areas.Forum.Controllers
     public class CommentController : Controller
     {
         private readonly IPostService postService;
-
         private readonly ICommentService commentService;
-
         private readonly UserManager<User> userManager;
 
         public CommentController(IPostService postService, ICommentService commentService, UserManager<User> userManager)
@@ -49,7 +47,7 @@ namespace WhatGenre.Areas.Forum.Controllers
 
                 await commentService.Save(comment);
 
-                return RedirectToAction("Index", "Forum");
+                return Redirect("Index");
             }
 
             return View("Create");
