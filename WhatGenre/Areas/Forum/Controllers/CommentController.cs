@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
@@ -18,6 +15,12 @@ namespace WhatGenre.Areas.Forum.Controllers
         private readonly ICommentService commentService;
         private readonly UserManager<User> userManager;
 
+        /// <summary>
+        /// comment controller constructor using DI for services.
+        /// </summary>
+        /// <param name="postService"></param>
+        /// <param name="commentService"></param>
+        /// <param name="userManager"></param>
         public CommentController(IPostService postService, ICommentService commentService, UserManager<User> userManager)
         {
             this.postService = postService;
@@ -25,12 +28,22 @@ namespace WhatGenre.Areas.Forum.Controllers
             this.userManager = userManager;
         }
 
+        /// <summary>
+        /// create form for comments
+        /// </summary>
+        /// <returns>View for creating a comment on a post </returns>
         [HttpGet, Route("Details/{id}/Comment/Create")]
         public IActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// creates a new comment by the post id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="comment"></param>
+        /// <returns>redirects to index if successful, returns create view if errors </returns>
         [Authorize]
         [HttpPost, Route("Details/{id}/Comment/Create")]
         public async Task<IActionResult> Create(int id, Comment comment)
@@ -52,6 +65,65 @@ namespace WhatGenre.Areas.Forum.Controllers
 
             return View("Create");
 
+        }
+
+        /// <summary>
+        /// displays view for editing a comment
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>View</returns>
+        [Authorize]
+        [HttpGet, Route("Details/{id}/Comment/Edit/{comment_id}")]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var comment = await commentService.GetCommentById(id);
+
+            return View("Edit");
+        }
+
+        /// <summary>
+        ///  needs doing
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="comment"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost, Route("Details/{id}/Comment/Edit/{comment_id}")]
+        public async Task<IActionResult> Edit(int id, Comment comment)
+        {
+           
+            comment = await commentService.GetCommentById(id);
+
+            return View("Edit");
+        }
+
+        /// <summary>
+        ///  displays view to delete a comment
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet, Route("Details/{id}/Comment/Delete/{comment_id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var comment = await commentService.GetCommentById(id);
+
+            return View("Delete");
+        }
+
+        /// <summary>
+        ///  needs doing
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="comment"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost, Route("Details/{id}/Comment/Delete/{comment_id}")]
+        public async Task<IActionResult> Delete(int id, Comment comment)
+        {
+            comment = await commentService.GetCommentById(id);
+
+            return View("Delete");
         }
 
     }
