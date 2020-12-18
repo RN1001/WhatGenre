@@ -23,7 +23,7 @@
                 <img src="..." class="mr-3" alt="...">
                 <div class="media-body">
                     <h6 class="mt-0">@item.User.UserName, @item.CommentDate</h6> <!-- TODO: Could add form to edit comment -->
-                    @item.CommentBody
+                   <p> @item.CommentBody <span> <a asp-controller="Comment" asp-action="Edit" asp-route-id="@item.Id"> {Edit} </a> </span> </p> 
                 </div>
             </div>
         }
